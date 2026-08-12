@@ -6,6 +6,7 @@ COPY src ./src
 RUN cargo build --release
 
 FROM alpine:3.23
+WORKDIR /main
 RUN apk add --no-cache ca-certificates
-COPY --from=builder /main/target/release/rikgw /usr/local/bin/rikgw
-ENTRYPOINT ["/usr/local/bin/rikgw"]
+COPY --from=builder /main/target/release/rikgw /main/rikgw
+ENTRYPOINT ["/main/rikgw"]
