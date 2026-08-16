@@ -1,19 +1,24 @@
+mod data_readout;
+mod conf;
+
 use rdkafka::config::ClientConfig;
 use rdkafka::producer::future_producer::Delivery;
 use rdkafka::producer::{FutureProducer, FutureRecord};
-use std::time::Duration;
+use tokio::time::{sleep, Duration};
 
 #[tokio::main]
 async fn main() {
-  let producer = setup_producer();
-  let topic = "my-topic";
-  let message_payload = "Hello, Kafka from Rust!";
-  let message_key = "user_key_123";
+  let producer: FutureProducer = setup_producer();
+  let topic: &str = "imadds";
+  let delay: u64 = 2;
 
-  send_message(producer, topic, message_payload, message_key).await;
+  loop {
+    send_message(producer, topic).await;
+    sleep(Duration::from_secs(delay)).await;
+  }
 }
 
-async fn send_message(producer: FutureProducer, topic: &str, message_payload: &str, message_key: &str) {
+async fn send_message(producer: FutureProducer, topic: &str) {
   let record = FutureRecord::to(topic)
       .payload(message_payload)
       .key(message_key);
