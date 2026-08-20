@@ -26,7 +26,7 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "169ac81b9123f316fde5b0e00175294dcdcdd800c1a6c92a4b58caf42a14cf1f"
 dependencies = [
- "embedded-hal 1.0.0",
+ "embedded-hal",
  "maybe-async-cfg",
 ]
 
@@ -82,16 +82,6 @@ checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
 name = "embedded-hal"
-version = "0.2.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "35949884794ad573cf46071e41c9b60efb0cb311e3ca01f7af807af1debc66ff"
-dependencies = [
- "nb 0.1.3",
- "void",
-]
-
-[[package]]
-name = "embedded-hal"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "361a90feb7004eca4019fb28352a9465666b24f840f5c3cddf0ff13920590b89"
@@ -102,8 +92,8 @@ version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fba4268c14288c828995299e59b12babdbe170f6c6d73731af1b4648142e8605"
 dependencies = [
- "embedded-hal 1.0.0",
- "nb 1.1.0",
+ "embedded-hal",
+ "nb",
 ]
 
 [[package]]
@@ -240,11 +230,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a8a605c95f708c78554738a12153b213f107d3bd5323f7ce32d6deb3faafb40"
 dependencies = [
  "cast",
- "embedded-hal 1.0.0",
+ "embedded-hal",
  "embedded-hal-nb",
  "gpio-cdev",
  "i2cdev",
- "nb 1.1.0",
+ "nb",
  "nix 0.27.1",
  "serialport",
  "spidev",
@@ -345,15 +335,6 @@ dependencies = [
  "libc",
  "wasi",
  "windows-sys 0.61.2",
-]
-
-[[package]]
-name = "nb"
-version = "0.1.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "801d31da0513b6ec5214e9bf433a77966320625a37860f910be265be6e18d06f"
-dependencies = [
- "nb 1.1.0",
 ]
 
 [[package]]
@@ -831,12 +812,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
 
 [[package]]
-name = "void"
-version = "1.0.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a02e4885ed3bc0f2de90ea6dd45ebcbb66dacffe03547fadbb0eeae2770887d"
-
-[[package]]
 name = "wasi"
 version = "0.11.1+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -941,11 +916,11 @@ dependencies = [
 
 [[package]]
 name = "xca9548a"
-version = "0.1.0"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b78f2fb959fc2f1fffc640f27453811a186f9e1a035cc459e305da372b6f3359"
+checksum = "df94495e7f28d551b72b2bf5304267fbb0075d78b182b49fbfb74f8910d63fec"
 dependencies = [
- "embedded-hal 0.2.7",
+ "embedded-hal",
 ]
 
 [[package]]

@@ -7,5 +7,5 @@ edition = "2024"
 tokio = { version = "1.53.1", features = ["full"] }
 rdkafka = { version = "0.39.0", features = ["tokio"] }
 bme280 = "0.5.1"
-xca9548a = "0.1.0"
+xca9548a = "1.0.0"
 linux-embedded-hal = "0.4.1"

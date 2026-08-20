@@ -1,8 +1,8 @@
 use std::fs;
 
-fn get_kafka_url() -> String {
+pub fn get_kafka_url() -> String {
   let mut url = String::new();
-  let content = fs::read_to_string("/ikgw/resources/.conf")?;
+  let content = fs::read_to_string("/ikgw/resources/.conf").unwrap();
   for line in content.lines() {
     if line.contains("KAFKA_URL=") {
       url = line.replace("KAFKA_URL=", "").trim().to_string();
@@ -12,9 +12,9 @@ fn get_kafka_url() -> String {
   url
 }
 
-fn get_system_config() -> Vec<String> {
+pub fn get_system_config() -> Vec<String> {
   let mut config: Vec<String> = Vec::with_capacity(2);
-  let content = fs::read_to_string("/ikgw/resources/.conf")?;
+  let content = fs::read_to_string("/ikgw/resources/.conf").unwrap();
   for line in content.lines() {
     if line.contains("SYSTEM_ID=") {
       let system_id = line.replace("SYSTEM_ID=", "").trim().to_string();
