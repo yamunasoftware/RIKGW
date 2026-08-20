@@ -1,18 +1,13 @@
 #[path = "conf.rs"]
 pub mod conf;
 
+#[path = "sensor_reading.rs"]
+pub mod sensor_reading;
+
 use linux_embedded_hal::{Delay, I2cdev};
 use xca9548a::{SlaveAddr, Xca9548a};
 use bme280::i2c::BME280;
-
-pub struct SensorReading {
-  device_id: String,
-  device_type: String,
-  channel: u8,
-  temperature: f32,
-  humidity: f32,
-  pressure: f32
-}
+use sensor_reading::SensorReading;
 
 pub fn data_readout() -> Vec<SensorReading> {
   let mut sensor_readings: Vec<SensorReading> = Vec::new();
