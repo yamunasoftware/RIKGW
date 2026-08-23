@@ -1,3 +1,6 @@
+use serde::Serialize;
+
+#[derive(Serialize)]
 pub struct SensorReading {
   pub device_id: String,
   pub device_type: String,

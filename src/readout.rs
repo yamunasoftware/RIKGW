@@ -1,8 +1,5 @@
-#[path = "conf.rs"]
-pub mod conf;
-
-#[path = "sensor_reading.rs"]
-pub mod sensor_reading;
+use crate::conf;
+use crate::sensor_reading;
 
 use linux_embedded_hal::{Delay, I2cdev};
 use xca9548a::{SlaveAddr, Xca9548a};
