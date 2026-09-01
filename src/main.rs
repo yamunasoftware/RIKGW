@@ -12,8 +12,8 @@ use log::{error, info};
 async fn main() {
   let topic: &str = "imadds";
   let delay: u64 = 10;
-  let kafka_url: String = conf::get_kafka_url();
-  let producer: FutureProducer = setup_producer(kafka_url);
+  let kafka_config: Vec<String> = conf::get_kafka_config();
+  let producer: FutureProducer = setup_producer(kafka_config);
   setup_logger().expect("Failed to Setup Logger");
 
   loop {
@@ -47,9 +47,21 @@ async fn send_message(producer: FutureProducer, topic: &str) {
   }
 }
 
-fn setup_producer(kafka_url: String) -> FutureProducer {
+fn setup_producer(kafka_config: Vec<String>) -> FutureProducer {
+  let kafka_url = &kafka_config[0];
+  let kafka_username = &kafka_config[1];
+  let kafka_password = &kafka_config[2];
+
+  let jaas_config = format!(
+    "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"{}\" password=\"{}\";",
+    kafka_username, kafka_password
+  );
+  
   let producer: FutureProducer = ClientConfig::new()
     .set("bootstrap.servers", kafka_url)
+    .set("security.protocol", "SASL_SSL")
+    .set("sasl.mechanism", "SCRAM-SHA-512")
+    .set("sasl.jaas.config", jaas_config)
     .set("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     .set("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     .set("acks", "all")

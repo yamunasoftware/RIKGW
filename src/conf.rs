@@ -1,29 +1,36 @@
 use std::fs;
 
-pub fn get_kafka_url() -> String {
-  let mut url = String::new();
+pub fn get_kafka_config() -> Vec<String> {
+  let mut config: Vec<String> = Vec::with_capacity(2);
   let content = fs::read_to_string("/ikgw/resources/.conf").unwrap();
+
   for line in content.lines() {
     if line.contains("KAFKA_URL=") {
-      url = line.replace("KAFKA_URL=", "").trim().to_string();
-      break;
+      config.push(line.replace("KAFKA_URL=", "").trim().to_string());
+    }
+
+    else if line.contains("KAFKA_USERNAME=") {
+      config.push(line.replace("KAFKA_USERNAME=", "").trim().to_string());
+    }
+
+    else if line.contains("KAFKA_PASSWORD=") {
+      config.push(line.replace("KAFKA_PASSWORD=", "").trim().to_string());
     }
   }
-  url
+  config
 }
 
 pub fn get_system_config() -> Vec<String> {
   let mut config: Vec<String> = Vec::with_capacity(2);
   let content = fs::read_to_string("/ikgw/resources/.conf").unwrap();
+
   for line in content.lines() {
     if line.contains("SYSTEM_ID=") {
-      let system_id = line.replace("SYSTEM_ID=", "").trim().to_string();
-      config.push(system_id);
+      config.push(line.replace("SYSTEM_ID=", "").trim().to_string());
     }
 
     else if line.contains("SYSTEM_TYPE=") {
-      let system_name = line.replace("SYSTEM_TYPE=", "").trim().to_string();
-      config.push(system_name);
+      config.push(line.replace("SYSTEM_TYPE=", "").trim().to_string());
     }
   }
   config
