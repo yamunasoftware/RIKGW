@@ -37,7 +37,7 @@ async fn send_message(producer: FutureProducer, topic: &str) {
       FutureRecord::to(topic)
         .key(topic)
         .payload(&payload),
-      Duration::from_secs(5),
+      Duration::from_secs(0),
     )
     .await;
 
